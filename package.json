@@ -1,0 +1,57 @@
+{
+  "name": "react-native-prepare-svg",
+  "version": "0.0.1",
+  "description": "Convert svg files to json, remove all unnecessary values.",
+  "main": "./lib/index",
+  "scripts": {
+    "test": "make test",
+    "build": "make build",
+    "bench": "make bench"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://fkfkfkf.com/hjhj"
+  },
+  "keywords": [
+    "convert svg to json",
+    "svg to json",
+    "svg",
+    "json",
+    "prepare react native icons",
+    "react native icons",
+    "react native",
+    "svg icons"
+  ],
+  "author": {
+    "name": "Jose Antonio Sanchez",
+    "email": "jasancheg@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "commander": "^2.11.0",
+    "debug": "^3.1.0",
+    "fs-promise": "^2.0.3",
+    "htmlparser2": "^3.9.2",
+    "promise": "^8.0.1",
+    "svgo": "^1.0.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "mocha": "^4.0.1",
+    "pre-commit": "^1.2.2",
+    "should": "^13.1.3"
+  },
+  "bin": {
+    "rnpreparesvg": "bin/rnpreparesvg.js"
+  },
+  "pre-commit": [
+    "test",
+    "build"
+  ]
+}
