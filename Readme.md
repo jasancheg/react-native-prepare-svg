@@ -115,20 +115,20 @@ rnPrepareSvg(SVG, {}, result => console.log(result));
 
 ### Response example:
 
- `rn-prepare-svg -i ./checkmark.svg -o ./mySvgLib.json  --pretty`
+ `rn-prepare-svg -i ./checkmark-icon.svg -o ./mySvgLib.json  --pretty`
 
 ```json
 // mySvgLib.json
 
 {
-  "checkmark": {
+  "checkmarkIcon": {
     "id": "cuanto-checkmark",
     "width": "100",
     "height": "100",
     "viewBox": "0 0 100 100",
     "childs": [
       {
-        "name": "path",
+        "type": "Path",
         "attrs": {
           "id": "checkmark-path",
           "display": "none",
@@ -137,7 +137,7 @@ rnPrepareSvg(SVG, {}, result => console.log(result));
         }
       },
       {
-        "name": "path",
+        "type": "Path",
         "attrs": {
           "id": "circle-path",
           "fill": "#548DCA",
