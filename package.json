@@ -1,6 +1,6 @@
 {
   "name": "react-native-prepare-svg",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Convert svg files to json, remove all unnecessary values.",
   "main": "./lib/index",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://fkfkfkf.com/hjhj"
+    "url": "https://github.com/jasancheg/react-native-prepare-svg"
   },
   "keywords": [
     "convert svg to json",

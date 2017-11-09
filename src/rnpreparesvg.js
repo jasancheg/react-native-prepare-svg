@@ -24,7 +24,8 @@ program
 const SRC_DIR   = program.input || '.';
 const DEST_FILE = program.output || 'svgLib.json';
 
-let sourceDir, sourceFile;
+let sourceDir;
+let sourceFile;
 
 const readFolder = () => {
   if (!fs.statSync(SRC_DIR).isDirectory()) {
@@ -36,24 +37,21 @@ const readFolder = () => {
   return fs.readdir(SRC_DIR);
 };
 
-const filterFile = (file) => {
-  return path.extname(file) === '.svg';
-};
+const filterFile = file => path.extname(file) === '.svg';
 
-const processFiles = (files) => {
+const processFiles = files => {
   const q = files.length;
-  // valid svg files count
   const v = files.reduce((count, file) => file.lastIndexOf('.svg' !== -1 ? ++count : count), 0);
 
-  console.log(`- ${chalk.cyan('Analyzed:')} ${chalk.yellow(q + ' file' + (q > 1 ? 's' : '')  + '...')}`);
-  console.log(`- ${chalk.cyan('Found svg:')} ${chalk.yellow(v + ' file' + (v > 1 ? 's' : '')  + '...')}`);
+  console.log(`- ${chalk.cyan('Analyzed:')} ${chalk.yellow(q + ' file' + (q > 1 ? 's' : ''))}`);
+  console.log(`- ${chalk.cyan('Found svg:')} ${chalk.yellow(v + ' file' + (v > 1 ? 's' : ''))}`);
 
   if (q === 1) {
     return new Promise((resolve, reject) => {
       if (filterFile(path.resolve(sourceDir, sourceFile))) {
         resolve(processSeparateFile(path.resolve(sourceDir, sourceFile)));
       } else {
-        reject(`${chalk.red('!!!')} File --input ${chalk.cyan(sourceFile)} ${chalk.red('should be .svg')} file`)
+        reject(`${chalk.red('!')} File --input ${chalk.cyan(sourceFile)} ${chalk.red('should be .svg')} file`)
       }
     });
   }
@@ -61,7 +59,7 @@ const processFiles = (files) => {
   return Promise.all(files.filter(filterFile).map(processFile));
 };
 
-const applyExtras = (title) => {
+const applyExtras = title => {
   const extras = {
     // optimize and remove unnecessary tags.
     svgo: true,
@@ -72,7 +70,7 @@ const applyExtras = (title) => {
   return extras;
 }
 
-const processSeparateFile = (file) => {
+const processSeparateFile = file => {
   const fileExt = path.extname(sourceFile);
   const fileName = path.basename(sourceFile, fileExt);
   return new Promise((resolve, reject) => {
@@ -82,7 +80,7 @@ const processSeparateFile = (file) => {
   });
 };
 
-const processFile = (file) => {
+const processFile = file => {
   const filePath = path.resolve(SRC_DIR, file);
   const fileExt = path.extname(file);
   const fileName = path.basename(file, fileExt);
