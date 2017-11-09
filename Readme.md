@@ -1,5 +1,7 @@
 # react-native-prepare-svg 
 
+[![npm version](https://badge.fury.io/js/react-native-prepare-svg.svg)](https://npmjs.org/package/react-native-prepare-svg) [![Dependency Status](https://img.shields.io/david/jasancheg/react-native-prepare-svg.svg?style=flat)](https://david-dm.org/jasancheg/react-native-prepare-svg)
+
 Tool to transform `svg` files and 'strings' into a flat `JSON` list.
 
 > Useful to manipulate `SVG` with `Expo` or `react-native-svg` Components.
@@ -27,7 +29,7 @@ Tool to transform `svg` files and 'strings' into a flat `JSON` list.
 
 ```
   -h, --help             output usage information
-  -v, --version          output the version number
+  -V, --version          output the version number
   -i, --input [input]    Specifies input folder or file.
                          Default current folder
   -o, --output [output]  Specifies output file. Default ./svgson.json
