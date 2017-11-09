@@ -7,7 +7,7 @@ lib: src
 	$(BABEL) src -d lib >&2; \
 	rm -rf bin >&2; \
 	test ! -d $(BIN_DIR) && mkdir $(BIN_DIR) >&2; \
-	mv lib/rn-prepare-svg-bin.js bin/rn-prepare-svg-bin.js >&2; \
+	mv lib/rn-prepare-svg-bin.js bin/rn-prepare-svg.js >&2; \
 
 clean:
 	rm -rf lib/ bin/
