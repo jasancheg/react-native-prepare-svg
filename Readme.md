@@ -123,9 +123,11 @@ rnPrepareSvg(SVG, {}, result => console.log(result));
 {
   "checkmarkIcon": {
     "type": "Svg",
-    "id": "cuanto-checkmark",
-    "width": "100",
-    "height": "100",
+    "attrs": {
+      "id": "cuanto-checkmark",
+      "width": "100",
+      "height": "100"
+    },
     "childs": [
       {
         "type": "Path",

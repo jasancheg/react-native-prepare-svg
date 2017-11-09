@@ -33,7 +33,7 @@ module.exports = function (input, options, callback) {
       multipass: true
     },
     svgo: false,
-    title: null,
+    title: null
   }
 
   const config = Object.assign({}, initialConfig, options)

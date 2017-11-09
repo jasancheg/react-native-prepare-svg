@@ -84,12 +84,12 @@ const flatList = svgs => {
   })
 
   svgs.forEach(svg => {
-    // Validate posible extra props
+    // Validate possible extra props
     if(svg.attrs.xmlnsXlink) delete svg.attrs.xmlnsXlink
 
     svgList[camelCase(svg.title)] = {
       type: 'Svg',
-      ...svg.attrs,
+      attrs: svg.attrs,
       childs: setNodeType(svg.childs)
     }
   })
