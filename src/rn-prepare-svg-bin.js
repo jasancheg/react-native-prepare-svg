@@ -41,7 +41,8 @@ const filterFile = file => path.extname(file) === '.svg';
 
 const processFiles = files => {
   const q = files.length;
-  const v = files.reduce((count, file) => file.lastIndexOf('.svg' !== -1 ? ++count : count), 0);
+  let count = 0;
+  const v = files.forEach((file, index) => file.lastIndexOf('.svg') !== -1 && ++count);
 
   console.log(`- ${chalk.cyan('Analyzed:')} ${chalk.yellow(q + ' file' + (q > 1 ? 's' : ''))}`);
   console.log(`- ${chalk.cyan('Found svg:')} ${chalk.yellow(v + ' file' + (v > 1 ? 's' : ''))}`);
@@ -63,8 +64,8 @@ const applyExtras = title => {
   const extras = {
     // optimize and remove unnecessary tags.
     svgo: true,
-    pathsKey: 'groupKey',
-    title: title || 'tempTitle',
+    // get icon title from file name
+    title
   }
 
   return extras;

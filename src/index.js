@@ -3,11 +3,11 @@
 import htmlparser from 'htmlparser2';
 import svgo from 'svgo';
 
-const filterTags = (node) => node.filter(n => {
+const filterTags = node => node.filter(n => {
   return n.type === 'tag' || (n.type === 'text' && /([^\s])/.test(n.data));
 });
 
-const setRoot = (source) => {
+const setRoot = source => {
   if (Array.isArray(source)) {
     const onlyTag = filterTags(source);
     return onlyTag.length === 1 ? onlyTag[0] : onlyTag;
@@ -16,13 +16,11 @@ const setRoot = (source) => {
   return source;
 }
 
-const camelCase = (prop) => {
-  return prop.replace(/[-|:]([a-z])/gi, (all, letter) => letter.toUpperCase());
-};
+const camelCase = prop => prop.replace(/[-|:]([a-z])/gi, (all, letter) => letter.toUpperCase());
 
-const isDataAttr = (prop) => /^data(-\w+)/.test(prop)
+const isDataAttr = prop => /^data(-\w+)/.test(prop);
 
-const generate = (source) => {
+const generate = source => {
   const root = setRoot(source);
   let obj = {};
 
@@ -58,10 +56,8 @@ const generate = (source) => {
   return obj;
 }
 
-const optimize = (should, input, plugins, callback) => {
-  should
-    ? new svgo(plugins).optimize(input).then(result => callback(result.data))
-    : callback(input);
+const optimize = (input, plugins, callback) => {
+  new svgo(plugins).optimize(input).then(result => callback(result.data));
 };
 
 const parseAndGenerate = (input, callback) => {
@@ -69,13 +65,12 @@ const parseAndGenerate = (input, callback) => {
   callback(generate(dom), setRoot(dom));
 };
 
-
 module.exports = function (input, options, callback) {
   const initialConfig = {
     svgoConfig: {
       plugins: [
-        { removeStyleElement: true },
-        { removeAttrs: {
+        {
+          removeAttrs: {
             attrs: '(stroke-width|stroke-linecap|stroke-linejoin)'
           }
         }
@@ -84,31 +79,19 @@ module.exports = function (input, options, callback) {
     },
     svgo: false,
     title: null,
-    pathsKey: null,
-    customAttrs: {},
   }
 
   const config = Object.assign({}, initialConfig, options);
-  const hasCustomAttrs = Object.getOwnPropertyNames(config.customAttrs).length !== 0;
-  const wrapInKey = (key, node) => ({ [key]: node });
+  const _processOne = (node, more) => Object.assign({}, node, more);
 
-  const _processOne = (node, more) => {
-    const nod = config.pathsKey ? wrapInKey(config.pathsKey, node) : node;
-    return hasCustomAttrs
-      ? Object.assign({}, nod, config.customAttrs, more)
-      : Object.assign({}, nod, more);
-  };
-
-  return optimize(config.svgo, input, config.svgoConfig, r => {
+  return optimize(input, config.svgoConfig, r => {
     parseAndGenerate(r, (generated, root) => {
       const isArray = Array.isArray(root);
       const more = config.title ? { title: config.title } : {};
 
-      if (isArray) {
-        callback( generated.map((node, i) => _processOne(node, more)) );
-      } else {
-        callback( _processOne(generated, more) )
-      }
+      isArray
+        ? callback( generated.map((node, i) => _processOne(node, more)) )
+        : callback( _processOne(generated, more) );
     });
   });
 };
