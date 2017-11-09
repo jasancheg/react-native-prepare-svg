@@ -20,7 +20,7 @@ module.exports = function (input, options, callback) {
       plugins: [
         { convertStyleToAttrs: true },
         { removeHiddenElems: false },
-        { removeViewBox: false },
+        { removeViewBox: true },
         { cleanupIDs: false },
         { removeXMLNS: true },
         { removeStyleElement: false },

@@ -73,12 +73,22 @@ const flatList = svgs => {
 
   const setNodeType = childs => childs.map(child => {
     child.type = capitalizeFirstLetter(child.name)
+
+     // Validate posible extra props
     delete child.name
+    delete child.xmlnsXlink
+
+    if(child.type === 'G') setNodeType(child.childs)
+
     return child
   })
 
   svgs.forEach(svg => {
+    // Validate posible extra props
+    if(svg.attrs.xmlnsXlink) delete svg.attrs.xmlnsXlink
+
     svgList[camelCase(svg.title)] = {
+      type: 'Svg',
       ...svg.attrs,
       childs: setNodeType(svg.childs)
     }
