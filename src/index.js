@@ -59,7 +59,9 @@ const generate = (source) => {
 }
 
 const optimize = (should, input, plugins, callback) => {
-  should ? new svgo(plugins).optimize(input, result => callback(result.data)) : callback(input);
+  should
+    ? new svgo(plugins).optimize(input).then(result => callback(result.data))
+    : callback(input);
 };
 
 const parseAndGenerate = (input, callback) => {
@@ -70,7 +72,6 @@ const parseAndGenerate = (input, callback) => {
 
 module.exports = function (input, options, callback) {
   const initialConfig = {
-    svgo: false,
     svgoConfig: {
       plugins: [
         { removeStyleElement: true },
@@ -81,6 +82,7 @@ module.exports = function (input, options, callback) {
       ],
       multipass: true
     },
+    svgo: false,
     title: null,
     pathsKey: null,
     customAttrs: {},
@@ -107,8 +109,6 @@ module.exports = function (input, options, callback) {
       } else {
         callback( _processOne(generated, more) )
       }
-
     });
   });
-
 };

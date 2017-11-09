@@ -9,7 +9,7 @@ import chalk from 'chalk';
 import path from 'path';
 
 import { version } from '../package.json';
-import svgson from '../lib/rnpreparesvg';
+import rnpreparesvg from '../lib';
 
 const list = (val) => { return val.split(','); };
 
@@ -17,7 +17,7 @@ program
   .version(version)
   .usage('[options] <keywords>')
   .option('-i, --input [input]', 'Specifies input folder or file. Default current')
-  .option('-o, --output [output]', 'Specifies output file. Default ./svgson.json')
+  .option('-o, --output [output]', 'Specifies output file. Default ./svgLib.json')
   .option('-p, --pretty', 'Prettyfied JSON')
   .parse(process.argv);
 
@@ -42,14 +42,18 @@ const filterFile = (file) => {
 
 const processFiles = (files) => {
   const q = files.length;
-  console.log(`--- ${chalk.yellow('Processing')} ${chalk.gray(q + ' file' + (q > 1 ? 's' : '')  + '...')}`);
+  // valid svg files count
+  const v = files.reduce((count, file) => file.lastIndexOf('.svg' !== -1 ? ++count : count), 0);
+
+  console.log(`- ${chalk.cyan('Analyzed:')} ${chalk.yellow(q + ' file' + (q > 1 ? 's' : '')  + '...')}`);
+  console.log(`- ${chalk.cyan('Found svg:')} ${chalk.yellow(v + ' file' + (v > 1 ? 's' : '')  + '...')}`);
 
   if (q === 1) {
     return new Promise((resolve, reject) => {
       if (filterFile(path.resolve(sourceDir, sourceFile))) {
         resolve(processSeparateFile(path.resolve(sourceDir, sourceFile)));
       } else {
-        reject(`${chalk.red('!!!')} File --input ${chalk.yellow(sourceFile)} ${chalk.red('should be .svg')} file`)
+        reject(`${chalk.red('!!!')} File --input ${chalk.cyan(sourceFile)} ${chalk.red('should be .svg')} file`)
       }
     });
   }
@@ -61,9 +65,7 @@ const applyExtras = (title) => {
   const extras = {
     // optimize and remove unnecessary tags.
     svgo: true,
-
     pathsKey: 'groupKey',
-
     title: title || 'tempTitle',
   }
 
@@ -75,7 +77,7 @@ const processSeparateFile = (file) => {
   const fileName = path.basename(sourceFile, fileExt);
   return new Promise((resolve, reject) => {
     return fs.readFile(file, 'utf-8').then(data => {
-      svgson(data, applyExtras(fileName), resolve);
+      rnpreparesvg(data, applyExtras(fileName), resolve);
     });
   });
 };
@@ -89,7 +91,7 @@ const processFile = (file) => {
       process.stdout.cursorTo(0);
       process.stdout.clearLine();
       process.stdout.write(file);
-      svgson(data, applyExtras(fileName), resolve);
+      rnpreparesvg(data, applyExtras(fileName), resolve);
     });
   });
 };
@@ -101,12 +103,12 @@ const toJSON = (obj, pretty) => {
 const printFile = obj => {
   process.stdout.clearLine();
   process.stdout.cursorTo(0);
-  console.log(`--- ${chalk.yellow('Transforming into')}${program.pretty ? chalk.gray(' Prettyfied') : ''} ${chalk.yellow('JSON notation')}`)
+  console.log(`- ${chalk.cyan('Transforming into')}${program.pretty ? chalk.yellow(' Prettyfied') : ''} ${chalk.cyan('JSON notation')}`)
   return toJSON(obj, program.pretty);
 };
 
 const writeOutput = content => {
-  console.log(`--- ${chalk.yellow('Saved file')} ${chalk.gray(DEST_FILE)}`);
+  console.log(`- ${chalk.cyan('Saved file')} ${chalk.yellow(DEST_FILE)}`);
   return fs.writeFile(DEST_FILE, content, 'utf8');
 };
 

@@ -1,5 +1,7 @@
 # react-native-prepare-svg 
 
+> work in progress..
+
 Tool to transform `svg` files and Strings into `JSON`.
 
 > Useful to manipulate `SVG` with `Expo` or `react-native-svg`.
