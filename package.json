@@ -1,6 +1,6 @@
 {
   "name": "react-native-prepare-svg",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Convert svg files to json, remove all unnecessary values.",
   "main": "./lib/index",
   "scripts": {
@@ -48,7 +48,7 @@
     "should": "^13.1.3"
   },
   "bin": {
-    "rn-prepare-svg": "bin/rn-prepare-svg.js"
+    "rn-prepare-svg": "bin/rn-prepare-svg-bin.js"
   },
   "pre-commit": [
     "test",
