@@ -99,11 +99,24 @@ const toJSON = (obj, pretty) => {
   return pretty ? JSON.stringify(obj, null, 2) : JSON.stringify(obj);
 };
 
+const flatList = svgs => {
+  const svgList = {};
+
+  svgs.forEach(svg => {
+    svgList[svg.title] = {
+      ...svg.attrs,
+      childs: svg.childs
+    };
+  });
+
+  return svgList;
+};
+
 const printFile = obj => {
   process.stdout.clearLine();
   process.stdout.cursorTo(0);
   console.log(`- ${chalk.cyan('Transforming into')}${program.pretty ? chalk.yellow(' Prettyfied') : ''} ${chalk.cyan('JSON notation')}`)
-  return toJSON(obj, program.pretty);
+  return toJSON(flatList(obj), program.pretty);
 };
 
 const writeOutput = content => {

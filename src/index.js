@@ -69,6 +69,12 @@ module.exports = function (input, options, callback) {
   const initialConfig = {
     svgoConfig: {
       plugins: [
+        { convertStyleToAttrs: true },
+        { removeHiddenElems: false },
+        { removeViewBox: false },
+        { cleanupIDs: false },
+        { removeXMLNS: true },
+        { removeStyleElement: false },
         {
           removeAttrs: {
             attrs: '(stroke-width|stroke-linecap|stroke-linejoin)'
