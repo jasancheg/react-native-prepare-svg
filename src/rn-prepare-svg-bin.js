@@ -42,10 +42,10 @@ const filterFile = file => path.extname(file) === '.svg';
 const processFiles = files => {
   const q = files.length;
   let count = 0;
-  const v = files.forEach((file, index) => file.lastIndexOf('.svg') !== -1 && ++count);
+  files.forEach((file, index) => file.lastIndexOf('.svg') !== -1 && ++count);
 
   console.log(`- ${chalk.cyan('Analyzed:')} ${chalk.yellow(q + ' file' + (q > 1 ? 's' : ''))}`);
-  console.log(`- ${chalk.cyan('Found svg:')} ${chalk.yellow(v + ' file' + (v > 1 ? 's' : ''))}`);
+  console.log(`- ${chalk.cyan('Found svg:')} ${chalk.yellow(count + ' file' + (count > 1 ? 's' : ''))}`);
 
   if (q === 1) {
     return new Promise((resolve, reject) => {

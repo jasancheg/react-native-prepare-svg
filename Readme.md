@@ -6,6 +6,9 @@ Tool to transform `svg` files and 'strings' into a flat `JSON` list.
 
 > Useful to manipulate `SVG` with `Expo` or `react-native-svg` Components.
 
+![](https://raw.githubusercontent.com/jasancheg/react-native-prepare-svg/master/src/sample.png)
+
+
 # Features
 
 - Convert svg files to json, remove all unnecessary values.
@@ -65,6 +68,25 @@ Tool to transform `svg` files and 'strings' into a flat `JSON` list.
   ```
   $ rn-prepare-svg -i ./svgs -o ./mySvgLib.json  --pretty
   ```
+
+### Use as npm script with local dependency
+
+
+```sh
+  # save in dependencies
+  npm i -D react-native-prepare-svg
+```
+
+add the npm scripts:
+
+```json
+  ...
+  "scripts": {
+    ...,
+    "build-icons": "node node_modules/react-native-prepare-svg/bin/rn-prepare-svg -i ./icons/svg -o ./icons/appIconsLib.js"
+  },
+...
+```
 
 
 ### Use as Node Module
