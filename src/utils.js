@@ -83,7 +83,7 @@ const flatList = svgs => {
     return child
   })
 
-  svgs.forEach(svg => {
+  const formatSvgResultObject = svg => {
     // Validate possible extra props
     if(svg.attrs.xmlnsXlink) delete svg.attrs.xmlnsXlink
 
@@ -92,8 +92,10 @@ const flatList = svgs => {
       attrs: {...svg.attrs},
       childs: setNodeType(svg.childs)
     }
-  })
+  }
 
+  if (Array.isArray(svgs)) svgs.forEach(formatSvgResultObject)
+  else formatSvgResultObject(svgs)
   return svgList
 }
 

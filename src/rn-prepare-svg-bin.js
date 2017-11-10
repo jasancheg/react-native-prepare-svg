@@ -21,7 +21,7 @@ program
   .option('-n, --avoidoptimize', 'Avoid json optimization')
   .parse(process.argv)
 
-const SRC_DIR   = program.input || '.'
+const SRC_DIR   = program.input || './'
 const DEST_FILE = program.output || 'svgLib.json'
 
 let sourceDir
@@ -31,6 +31,7 @@ const readFolder = () => {
   if (!fs.statSync(SRC_DIR).isDirectory()) {
     sourceFile = path.basename(SRC_DIR)
     sourceDir = path.dirname(SRC_DIR)
+
     return Promise.resolve([SRC_DIR])
   }
 
@@ -46,7 +47,7 @@ const processFiles = files => {
   console.log(`- ${chalk.cyan('Analyzed:')} ${chalk.yellow(q + ' file' + (q > 1 ? 's' : ''))}`)
   console.log(`- ${chalk.cyan('Found svg:')} ${chalk.yellow(count + ' file' + (count > 1 ? 's' : ''))}`)
 
-  if (q === 1) {
+  if (SRC_DIR.lastIndexOf('.svg') !== -1 && q === 1) {
     return new Promise((resolve, reject) => {
       if (filterFile(path.resolve(sourceDir, sourceFile))) {
         resolve(processSeparateFile(path.resolve(sourceDir, sourceFile)))
