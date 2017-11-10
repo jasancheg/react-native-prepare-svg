@@ -18,6 +18,7 @@ program
   .option('-i, --input [input]', 'Specifies input folder or file. Default current')
   .option('-o, --output [output]', 'Specifies output file. Default ./svgLib.json')
   .option('-p, --pretty', 'Prettyfied JSON')
+  .option('-n, --avoidoptimize', 'Avoid json optimization')
   .parse(process.argv)
 
 const SRC_DIR   = program.input || '.'

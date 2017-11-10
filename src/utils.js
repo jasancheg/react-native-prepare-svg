@@ -89,7 +89,7 @@ const flatList = svgs => {
 
     svgList[camelCase(svg.title)] = {
       type: 'Svg',
-      attrs: svg.attrs,
+      attrs: {...svg.attrs},
       childs: setNodeType(svg.childs)
     }
   })

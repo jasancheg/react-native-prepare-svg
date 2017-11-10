@@ -13,9 +13,8 @@ Tool to transform `svg` files and 'strings' into a flat `JSON` list.
 
 - Convert svg files to json, remove all unnecessary values.
 - Group all svg files into a common lib file.
-- Optimize output with [svgo](https://github.com/svg/svgo)
-- Returns a json output that is friendly to be used in the react native application with [Expo.io](https://expo.io/) or [react-native-svg](https://www.npmjs.com/package/react-native-svg)
-
+- Optimize output with [svgo](https://github.com/svg/svgo).
+- Returns a json output friendly to be consumed by the [React Native](https://facebook.github.io/react-native/) components provided by [Expo.io](https://expo.io/) or [react-native-svg](https://www.npmjs.com/package/react-native-svg).
 
 ### How to use
 
@@ -30,17 +29,18 @@ Tool to transform `svg` files and 'strings' into a flat `JSON` list.
 
 ### Options
 
-```
-  -h, --help             output usage information
-  -V, --version          output the version number
-  -i, --input [input]    Specifies input folder or file.
-                         Default current folder
-  -o, --output [output]  Specifies output file. Default ./svgson.json
-  -p, --pretty           Prettyfied JSON
+```sh
+  -h, --help              output usage information
+  -V, --version           output the version number
+  -i, --input [input]     Specifies input folder or file.
+                          Default current folder
+  -o, --output [output]   Specifies output file. Default ./svgson.json
+  -p, --pretty            Prettyfied JSON
+
 ```
 
 
-### Examples
+### Use via CLI
 
 - `input` current folder width default `output` **svgLib.json** file
 
@@ -70,7 +70,6 @@ Tool to transform `svg` files and 'strings' into a flat `JSON` list.
   ```
 
 ### Use as npm script with local dependency
-
 
 ```sh
   # save in dependencies
