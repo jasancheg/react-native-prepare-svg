@@ -3,6 +3,7 @@
 [![npm version](https://badge.fury.io/js/react-native-prepare-svg.svg)](https://npmjs.org/package/react-native-prepare-svg) [![Dependency Status](https://img.shields.io/david/jasancheg/react-native-prepare-svg.svg?style=flat)](https://david-dm.org/jasancheg/react-native-prepare-svg)
 
 Tool to transform `svg` files and 'strings' into a flat `JSON` list.
+Generate valid data for [react-native-svgx](https://www.npmjs.com/package/react-native-svgx).
 
 > Useful to manipulate `SVG` with `Expo` or `react-native-svg` Components.
 
@@ -15,6 +16,7 @@ Tool to transform `svg` files and 'strings' into a flat `JSON` list.
 - Group all svg files into a common lib file.
 - Optimize output with [svgo](https://github.com/svg/svgo).
 - Returns a json output friendly to be consumed by the [React Native](https://facebook.github.io/react-native/) components provided by [Expo.io](https://expo.io/) or [react-native-svg](https://www.npmjs.com/package/react-native-svg).
+- It was designed to generate the data required by the [react-native-svgx](https://www.npmjs.com/package/react-native-svgx) component.
 
 ### How to use
 
